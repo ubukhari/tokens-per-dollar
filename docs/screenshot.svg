@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="822" height="1069" viewBox="0 0 822 1069" role="img" aria-label="tokens-per-dollar output on synthetic history">
+  <style>text{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#d4d4d4}.cmd{fill:#7ee787}</style>
+  <rect width="100%" height="100%" rx="8" fill="#0d1117"/>
+  <text x="16" y="29" class="cmd" textLength="497.7" lengthAdjust="spacingAndGlyphs" xml:space="preserve">$ npx --allow-git=root github:agentwares/tokens-per-dollar demo</text>
+  <text x="16" y="46" textLength="497.7" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Synthetic history, generated for this demo: not anyone's usage.</text>
+  <text x="16" y="63" xml:space="preserve"></text>
+  <text x="16" y="80" textLength="529.3" lengthAdjust="spacingAndGlyphs" xml:space="preserve">tokens-per-dollar — your coding agents' month, priced on every plan</text>
+  <text x="16" y="97" textLength="592.5" lengthAdjust="spacingAndGlyphs" xml:space="preserve">7 Sep – 7 Oct 2026 · read from this machine's transcripts; nothing was sent</text>
+  <text x="16" y="114" xml:space="preserve"></text>
+  <text x="16" y="131" textLength="632.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Claude Code: 2,313 requests, 170.0M tokens, $241.93 at Anthropic API list prices</text>
+  <text x="16" y="148" textLength="513.5" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  busiest 5 hours $29.82 · busiest week $109.21 (API list prices)</text>
+  <text x="16" y="165" xml:space="preserve"></text>
+  <text x="16" y="182" textLength="505.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  plan                  fee/mo  a month like this            how</text>
+  <text x="16" y="199" textLength="782.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Copilot Max             $100            $117.28  estimate  $217.28 of credits, $200.00 included ²</text>
+  <text x="16" y="216" textLength="774.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Copilot Pro+             $39            $186.28  estimate  $217.28 of credits, $70.00 included ²</text>
+  <text x="16" y="233" textLength="774.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Copilot Pro              $10            $212.28  estimate  $217.28 of credits, $15.00 included ²</text>
+  <text x="16" y="250" textLength="679.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Anthropic API              —            $241.93  priced    list prices × your tokens</text>
+  <text x="16" y="267" textLength="679.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Claude Pro               $20        from $20.00            allowance not published ¹</text>
+  <text x="16" y="284" textLength="758.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Claude Team standard     $25        from $25.00            1.25× Pro a session · 2 seats min ¹</text>
+  <text x="16" y="301" textLength="624.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Claude Max 5x           $100       from $100.00            5× Pro a session ¹</text>
+  <text x="16" y="318" textLength="758.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Claude Team premium     $125       from $125.00            6.25× Pro a session · 2 seats min ¹</text>
+  <text x="16" y="335" textLength="632.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Claude Max 20x          $200       from $200.00            20× Pro a session ¹</text>
+  <text x="16" y="352" xml:space="preserve"></text>
+  <text x="16" y="369" textLength="718.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Cheapest priced: Copilot Max, $117.28 a month (estimate), $124.65 less than Anthropic API</text>
+  <text x="16" y="386" textLength="110.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">    ($241.93).</text>
+  <text x="16" y="403" textLength="782.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Could be cheaper, if the allowance Anthropic does not publish holds your busiest 5 hours ($29.82)</text>
+  <text x="16" y="420" textLength="790.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">    and week ($109.21): Claude Pro from $20.00, Claude Team standard from $25.00, Claude Max 5x from</text>
+  <text x="16" y="437" textLength="94.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">    $100.00.</text>
+  <text x="16" y="454" xml:space="preserve"></text>
+  <text x="16" y="471" textLength="529.3" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Codex: 628 requests, 25.8M tokens, $34.68 at OpenAI API list prices</text>
+  <text x="16" y="488" textLength="489.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  busiest 5 hours $2.41 · busiest week $9.16 (API list prices)</text>
+  <text x="16" y="505" textLength="790.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Codex's own readings (Plus): busiest 5-hour window 48%, busiest week 12% of the limit, never at it</text>
+  <text x="16" y="522" xml:space="preserve"></text>
+  <text x="16" y="539" textLength="450.3" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  plan           fee/mo  a month like this            how</text>
+  <text x="16" y="556" textLength="711.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  ChatGPT Plus      $20             $20.00  measured  Codex's readings: never at the limit</text>
+  <text x="16" y="573" textLength="711.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Copilot Pro       $10             $29.68  estimate  $34.68 of credits, $15.00 included ²</text>
+  <text x="16" y="590" textLength="600.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Codex credits       —             $33.50  priced    837 credits at $0.04 ³</text>
+  <text x="16" y="607" textLength="624.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  OpenAI API          —             $34.68  priced    list prices × your tokens</text>
+  <text x="16" y="624" textLength="711.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Copilot Pro+      $39             $39.00  estimate  $34.68 of credits, $70.00 included ²</text>
+  <text x="16" y="641" textLength="718.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Copilot Max      $100            $100.00  estimate  $34.68 of credits, $200.00 included ²</text>
+  <text x="16" y="658" textLength="718.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  ChatGPT Pro      $100       from $100.00            no 5-hour limit; weekly not published</text>
+  <text x="16" y="675" xml:space="preserve"></text>
+  <text x="16" y="692" textLength="766.3" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Cheapest priced: ChatGPT Plus, $20.00 a month (measured), $9.68 less than Copilot Pro ($29.68).</text>
+  <text x="16" y="709" xml:space="preserve"></text>
+  <text x="16" y="726" textLength="639.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve">All of it: $137.28 a month, Claude Code on Copilot Max ² + Codex on ChatGPT Plus.</text>
+  <text x="16" y="743" textLength="387.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  On one plan: Copilot Max, $151.96 (estimate ²).</text>
+  <text x="16" y="760" textLength="774.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Last vendor change that moved this answer: 1 Jun 2026, GitHub. Every Copilot plan billed in GitHub</text>
+  <text x="16" y="777" textLength="766.3" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  AI credits, each token priced by model, replacing premium requests (which remain only on legacy</text>
+  <text x="16" y="794" textLength="126.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  annual plans).</text>
+  <text x="16" y="811" textLength="600.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  Without it: Claude Code on Anthropic API + Codex on ChatGPT Plus, $261.93.</text>
+  <text x="16" y="828" textLength="774.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Latest change to a plan in it: 14 Sep 2026, Anthropic. The promotion ended: standard weekly limits</text>
+  <text x="16" y="845" textLength="782.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  in Claude Code are 25% higher than before it, which is one sixth (about 17%) less than during it.</text>
+  <text x="16" y="862" textLength="568.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Announced: 14 Oct 2026, OpenAI. GPT-5.5 retires from Codex on all plans.</text>
+  <text x="16" y="879" xml:space="preserve"></text>
+  <text x="16" y="896" textLength="758.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">¹ Anthropic publishes Claude plan allowances only as multiples of Pro per 5-hour session, plus a</text>
+  <text x="16" y="913" textLength="782.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  weekly limit shared with Claude on the web; past them, extra usage is billed at API rates. "from"</text>
+  <text x="16" y="930" textLength="150.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  is the fee alone.</text>
+  <text x="16" y="947" textLength="734.7" lengthAdjust="spacingAndGlyphs" xml:space="preserve">² An estimate: Copilot keeps no local logs, so these are your Claude Code and Codex tokens at</text>
+  <text x="16" y="964" textLength="790.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  GitHub's per-token rates; its agent would not use exactly these tokens. Included credits contain a</text>
+  <text x="16" y="981" textLength="316.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  flex allotment GitHub says may change.</text>
+  <text x="16" y="998" textLength="766.3" lengthAdjust="spacingAndGlyphs" xml:space="preserve">³ OpenAI does not state a price per credit for Plus or Pro; $0.04 is derived from its own figures</text>
+  <text x="16" y="1015" textLength="639.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  (2,500 credits for $100; 25 credits to the dollar on its Enterprise rate card).</text>
+  <text x="16" y="1032" textLength="750.5" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Codex's readings are account-wide: Codex use on other machines and in the cloud counts in them.</text>
+  <text x="16" y="1049" textLength="695.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">Plan prices read 8 Oct 2026 from the vendors' pages; --json lists every source and date.</text>
+</svg>

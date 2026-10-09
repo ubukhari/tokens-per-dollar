@@ -1,0 +1,78 @@
+{
+  "name": "tokens-per-dollar",
+  "version": "0.1.0",
+  "description": "What your own last 30 days of Claude Code and Codex would cost on every coding plan: Claude Pro, Max and Team, ChatGPT Plus and Pro, Codex credits, the APIs, and Copilot AI credits as an estimate. Prices your local transcripts against the vendors' published, dated prices. Local only; sends nothing.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "tokens-per-dollar": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentwares/tokens-per-dollar.git"
+  },
+  "homepage": "https://agentwares-agentcheck.vercel.app/tokens-per-dollar",
+  "bugs": {
+    "url": "https://github.com/agentwares/tokens-per-dollar/issues"
+  },
+  "keywords": [
+    "claude-code",
+    "codex",
+    "claude-max",
+    "claude-code-pricing",
+    "codex-credits",
+    "github-copilot",
+    "ai-credits",
+    "token-usage",
+    "cost",
+    "usage-limits",
+    "ai-coding",
+    "coding-agents",
+    "cli"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "screenshot": "node scripts/screenshot.mjs",
+    "icon": "node scripts/icon.mjs",
+    "pretest": "pnpm run build:dist",
+    "pretypecheck": "pnpm run build:dist",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "build:dist": "tsup"
+  },
+  "dependencies": {
+    "seatledger": "^0.3.0"
+  },
+  "packageManager": "pnpm@9.15.9",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.4.1",
+    "eslint": "^10.9.1",
+    "prettier": "^3.9.6",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.69.0",
+    "vitest": "^4.1.11"
+  }
+}
