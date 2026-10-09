@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.2.0 (2026-10-08)
+
+Codex first.
+
+- `npx --allow-git=root github:agentwares/tokens-per-dollar forecast`: from the limit readings Codex writes with every response and
+  this machine's last 14 days, when your pace reaches the weekly limit (or how full it will be when
+  it resets) and the 5-hour window open now; your typical and busiest 5-hour sessions against the
+  5-hour limit; how much of your week the plan Codex reports holds, the rest at the credit rate
+  card; for a plan you are not on, the multiple of your plan's weekly limit it would need, since
+  OpenAI publishes neither; Codex credits and the OpenAI API from the same comparison. Every
+  projection is labelled an estimate, every reading measured.
+- Claude Code's side of the forecast is what its transcripts record: each time a plan limit refused
+  a request (from 2.1.255 the `quotaLimits` field, before that the message shown), what this machine
+  had used in that window at API list prices, and how many recent sessions reached the least of
+  them. Hits are kept per transcript in `~/.tokens-per-dollar/limits-v1`, never their text.
+- `forecast demo` runs it on seatledger's synthetic history with Codex weekly readings and Claude
+  Code refusals added in their real formats.
+- The forecast ends with one line about seatledger Team (13 months of every developer's history,
+  rate-change email, $49 a month for up to 10 developers), with `?ref=tokens-per-dollar`; not with
+  `--json`, `--quiet`, `TPD_QUIET=1` or in the demo. `TPD_TZ` sets the zone its times are printed in.
+- A second plugin skill, `/tokens-per-dollar:forecast`.
+
 ## 0.1.0 (2026-10-08)
 
 First release.

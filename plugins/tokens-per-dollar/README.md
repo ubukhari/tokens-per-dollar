@@ -3,6 +3,10 @@
 What this machine's last 30 days of Claude Code and Codex would cost on every coding plan, explained
 inside Claude Code.
 
+- `/tokens-per-dollar:forecast` runs `npx -y --allow-git=root github:agentwares/tokens-per-dollar forecast` and explains when
+  your own Codex pace reaches the 5-hour and weekly limits (from the limit readings Codex writes to
+  disk), how much of your week ChatGPT Plus or Pro holds and what the rest costs, and the Claude
+  Code limit hits your transcripts record. Every projection is labelled an estimate.
 - `/tokens-per-dollar:plans` runs `npx -y --allow-git=root github:agentwares/tokens-per-dollar` (with your arguments, such
   as `--since 90d` or `--plans claude,copilot`) and explains the answer: the cheapest priced plan for
   each client, the margin, what an allowance the vendor does not publish would have to hold for a
@@ -10,8 +14,8 @@ inside Claude Code.
 
 ## What it runs, reads and sends
 
-- **Runs** one command, through the Bash tool. The skill pre-approves nothing, so Claude Code asks
-  you before the command runs.
+- **Runs** one command per skill, through the Bash tool. Each skill pre-approves nothing, so Claude
+  Code asks you before the command runs.
 - **Fetches** tokens-per-dollar with `npx`, from where that command names, and its one dependency,
   `seatledger`, from the npm registry.
 - **Reads** this machine's Claude Code transcripts (`~/.claude/projects`) and Codex rollouts

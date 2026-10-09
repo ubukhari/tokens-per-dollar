@@ -20,6 +20,13 @@ export const SEATLEDGER_URL =
 
 export const HINT = `Your team's coding-agent ledger, with a flag when the token rate moves: seatledger, free for up to 3 developers; email alerts on Team, $49/month. ${SEATLEDGER_URL}`;
 
+/**
+ * The forecast's last line, every run (never with `--json`, `--quiet` or `TPD_QUIET=1`, and not in
+ * the demo): the forecast reads one laptop's history, and what keeps it is seatledger Team. It names
+ * only what Team serves today (`distribution.test.ts` holds it against packages/config).
+ */
+export const FORECAST_HANDOFF = `This forecast reads one laptop's history. seatledger Team keeps every developer's Claude Code and Codex history for 13 months and emails you when the token rate changes, $49/month for up to 10 developers: ${SEATLEDGER_URL}`;
+
 /** tokens-per-dollar's own files: `$TPD_HOME`, else `~/.tokens-per-dollar`. */
 export function tpdHome(env: NodeJS.ProcessEnv = process.env): string {
   return env.TPD_HOME ? path.resolve(env.TPD_HOME) : path.join(homedir(), ".tokens-per-dollar");

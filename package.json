@@ -1,6 +1,6 @@
 {
   "name": "tokens-per-dollar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "What your own last 30 days of Claude Code and Codex would cost on every coding plan: Claude Pro, Max and Team, ChatGPT Plus and Pro, Codex credits, the APIs, and Copilot AI credits as an estimate. Prices your local transcripts against the vendors' published, dated prices. Local only; sends nothing.",
   "license": "MIT",
   "type": "module",

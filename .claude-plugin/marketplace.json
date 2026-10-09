@@ -1,6 +1,6 @@
 {
   "name": "tokens-per-dollar",
-  "description": "tokens-per-dollar, from inside Claude Code: what this machine's last 30 days of Claude Code and Codex would cost on every coding plan, read from the local transcripts. Open source, no account, nothing sent anywhere.",
+  "description": "tokens-per-dollar, from inside Claude Code: when your Codex pace reaches the weekly limit, and what this machine's last 30 days of Claude Code and Codex would cost on every coding plan, read from the local transcripts. Open source, no account, nothing sent anywhere.",
   "owner": {
     "name": "agentwares",
     "url": "https://github.com/agentwares"
@@ -9,7 +9,7 @@
     {
       "name": "tokens-per-dollar",
       "source": "./plugins/tokens-per-dollar",
-      "description": "/tokens-per-dollar:plans runs `npx --allow-git=root github:agentwares/tokens-per-dollar` and explains what this machine's month would cost on Claude Pro, Max and Team, ChatGPT Plus and Pro, Codex credits, the APIs and Copilot: the cheapest priced plan, the margin, what an unpublished allowance would have to hold, and the vendor change that last moved the answer.",
+      "description": "/tokens-per-dollar:forecast says when your own Codex pace reaches the weekly limit, from the readings Codex writes to disk, and what that pace costs on Plus, Pro, credits and the API. /tokens-per-dollar:plans runs `npx --allow-git=root github:agentwares/tokens-per-dollar` and explains what this machine's month would cost on Claude Pro, Max and Team, ChatGPT Plus and Pro, Codex credits, the APIs and Copilot: the cheapest priced plan, the margin, what an unpublished allowance would have to hold, and the vendor change that last moved the answer.",
       "category": "productivity",
       "tags": [
         "claude-code",

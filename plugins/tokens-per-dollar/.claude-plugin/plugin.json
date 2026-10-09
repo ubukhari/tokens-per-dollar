@@ -1,7 +1,7 @@
 {
   "name": "tokens-per-dollar",
-  "version": "0.1.0",
-  "description": "What this machine's last 30 days of Claude Code and Codex would cost on every coding plan: Claude Pro, Max and Team, ChatGPT Plus and Pro, Codex credits, the APIs, and Copilot as an estimate. Runs npx --allow-git=root github:agentwares/tokens-per-dollar locally; no account, no network, no LLM calls of its own.",
+  "version": "0.2.0",
+  "description": "When your own Codex pace reaches the weekly limit, from the readings Codex writes to disk, and what your last 30 days of Claude Code and Codex would cost on every coding plan: Claude Pro, Max and Team, ChatGPT Plus and Pro, Codex credits, the APIs, and Copilot as an estimate. Runs npx --allow-git=root github:agentwares/tokens-per-dollar locally; no account, no network, no LLM calls of its own.",
   "author": {
     "name": "agentwares",
     "url": "https://github.com/agentwares"

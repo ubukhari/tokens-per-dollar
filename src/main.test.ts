@@ -3,7 +3,9 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { writeSyntheticHistory, type PlanCompareView } from "seatledger";
-import { HINT, SEATLEDGER_URL } from "./hint.js";
+import { FORECAST_SYNTHETIC_LABEL } from "./forecast-demo.js";
+import type { ForecastView } from "./forecast.js";
+import { FORECAST_HANDOFF, HINT, SEATLEDGER_URL } from "./hint.js";
 import { main, type Io } from "./main.js";
 
 let root: string;
@@ -121,6 +123,78 @@ describe("tokens-per-dollar", () => {
       "Synthetic history, generated for this demo: not anyone's usage.",
     );
     expect(r.out()).not.toContain(SEATLEDGER_URL);
+  });
+});
+
+describe("forecast", () => {
+  it("--help names the command, its pace and its labels", async () => {
+    const h = io();
+    expect(await main(["--help"], h.sink, env())).toBe(0);
+    expect(h.out()).toContain("forecast demo");
+    expect(h.out()).toContain("labelled an estimate");
+    expect(h.out()).toContain("TPD_TZ=");
+  });
+
+  it("forecasts the last 14 days, Codex first, and ends with the seatledger Team line", async () => {
+    const r = io(false);
+    expect(await main(["forecast", ...dirs()], r.sink, env())).toBe(0);
+    const text = r.out();
+    expect(text).toMatch(/^tokens-per-dollar forecast/);
+    expect(text).toContain("Pace: your last 14 days, 23 Sep – 7 Oct 2026 · times in UTC");
+    expect(text.indexOf("Codex — from its own limit readings (ChatGPT Plus)")).toBeLessThan(
+      text.indexOf("Claude Code — what its transcripts show"),
+    );
+    expect(text).toContain("Limit hits     none recorded in the last 30 days");
+    // the hand-off is the last line, every run, even off a terminal
+    expect(text.trimEnd().split("\n").at(-1)).toBe(FORECAST_HANDOFF);
+    const again = io(false);
+    await main(["forecast", ...dirs()], again.sink, env());
+    expect(again.out().trimEnd().split("\n").at(-1)).toBe(FORECAST_HANDOFF);
+    for (const s of ["webapp", "api-server", "infra", root, "/home/dev"])
+      expect(text).not.toContain(s);
+  });
+
+  it("no hand-off with --quiet, TPD_QUIET=1, --json, in the demo, or with nothing to forecast", async () => {
+    const empty = mkdtempSync(path.join(root, "empty-forecast-"));
+    for (const [args, extra] of [
+      [["forecast", ...dirs(), "--quiet"], {}],
+      [["forecast", ...dirs()], { TPD_QUIET: "1" }],
+      [["forecast", ...dirs(), "--json"], {}],
+      [["forecast", "demo"], {}],
+      [["forecast", "--claude-dir", empty, "--codex-dir", empty], {}],
+    ] as const) {
+      const r = io(true);
+      expect(await main([...args], r.sink, env(extra))).toBe(0);
+      expect(r.out()).not.toContain(SEATLEDGER_URL);
+    }
+  });
+
+  it("--json is the forecast view; TPD_TZ sets the zone; --since sets the pace", async () => {
+    const r = io();
+    expect(await main(["forecast", ...dirs(), "--json", "--since", "7d"], r.sink, env())).toBe(0);
+    const v = JSON.parse(r.out()) as ForecastView;
+    expect(v.view).toBe("forecast");
+    expect(v.pace.days).toBeGreaterThan(6);
+    expect(v.pace.days).toBeLessThanOrEqual(7);
+    expect(v.codex?.plan?.id).toBe("chatgpt-plus");
+    const z = io();
+    await main(["forecast", ...dirs()], z.sink, env({ TPD_TZ: "Asia/Tokyo" }));
+    expect(z.out()).toContain("times in Asia/Tokyo");
+  });
+
+  it("forecast demo says it is synthetic first; anything after it is a usage error", async () => {
+    const r = io(true);
+    expect(await main(["forecast", "demo"], r.sink, env())).toBe(0);
+    expect(r.out().split("\n")[0]).toBe(FORECAST_SYNTHETIC_LABEL);
+    expect(r.out()).toContain("you reach it Thu 8 Oct");
+    for (const args of [
+      ["forecast", "now"],
+      ["forecast", "demo", "x"],
+      ["forecast", "demo", "--since", "7d"],
+    ]) {
+      const bad = io();
+      expect(await main(args, bad.sink, env())).toBe(2);
+    }
   });
 });
 

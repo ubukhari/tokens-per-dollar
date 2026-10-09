@@ -18,7 +18,13 @@ import {
   priceFor,
 } from "seatledger";
 import { runDemo, screenshotText, SYNTHETIC_LABEL, textToSvg, type Demo } from "./demo.js";
-import { HINT, SEATLEDGER_URL } from "./hint.js";
+import {
+  FORECAST_SYNTHETIC_LABEL,
+  forecastScreenshotText,
+  runForecastDemo,
+  type ForecastDemo,
+} from "./forecast-demo.js";
+import { FORECAST_HANDOFF, HINT, SEATLEDGER_URL } from "./hint.js";
 import { INSTALL, ON_NPM, REPO, RUN } from "./install.js";
 import { calendarDay } from "./render.js";
 
@@ -35,8 +41,9 @@ const pkg = json<{
 }>("package.json");
 
 let demo: Demo;
+let forecastDemo: ForecastDemo;
 beforeAll(async () => {
-  demo = await runDemo();
+  [demo, forecastDemo] = await Promise.all([runDemo(), runForecastDemo()]);
 });
 
 describe("package", () => {
@@ -46,7 +53,7 @@ describe("package", () => {
 
   it("ships the CLI and the files the README points at", () => {
     expect(pkg.name).toBe("tokens-per-dollar");
-    expect(pkg.version).toBe("0.1.0");
+    expect(pkg.version).toBe("0.2.0");
     expect(pkg.bin).toEqual({ "tokens-per-dollar": "./dist/cli.js" });
     expect(pkg.files).toEqual(expect.arrayContaining(["dist", "README.md", "CHANGELOG.md"]));
     expect(pkg.homepage).toBe("https://agentwares-agentcheck.vercel.app/tokens-per-dollar");
@@ -83,6 +90,22 @@ describe("README", () => {
     for (const url of new Set(PLANS.flatMap((p) => p.sources.map((s) => s.url))))
       expect(readme, url).toContain(url);
     for (const s of CODEX_CREDIT.sources) expect(readme, s.url).toContain(s.url);
+  });
+
+  it("shows the forecast's real output on synthetic history between its markers", () => {
+    const start =
+      "<!-- forecast-demo: written by src/distribution.test.ts from `forecast demo` -->";
+    const end = "<!-- /forecast-demo -->";
+    const shot = forecastScreenshotText(forecastDemo);
+    expect(shot.split("\n")[1]).toBe(FORECAST_SYNTHETIC_LABEL);
+    const at = readme.indexOf(start);
+    const to = readme.indexOf(end);
+    expect(at).toBeGreaterThan(0);
+    expect(to).toBeGreaterThan(at);
+    const want = `${readme.slice(0, at + start.length)}\n\n\`\`\`text\n${shot}\n\`\`\`\n\n${readme.slice(to)}`;
+    // TPD_WRITE_INSTALL=1 rewrites it, with the picture
+    if (process.env["TPD_WRITE_INSTALL"]) writeFileSync(here("README.md"), want);
+    expect(read("README.md")).toBe(want);
   });
 
   it("says which figures are estimates, measured or derived, and that nothing is sent", () => {
@@ -122,6 +145,33 @@ describe("the seatledger line", () => {
       expect(HINT).toContain(`email alerts on Team, $${team.priceUsdMonthly}/month`);
       expect(team.features).toContain("email_alerts");
       expect(free.features).not.toContain("email_alerts");
+    },
+  );
+
+  it.skipIf(!existsSync(products))(
+    "the forecast's last line names only what seatledger Team serves today",
+    async () => {
+      const { SEATLEDGER_TIERS } = (await import(/* @vite-ignore */ products.href)) as {
+        SEATLEDGER_TIERS: Record<
+          string,
+          {
+            priceUsdMonthly: number;
+            limits: { quantity: number; historyDays?: number };
+            features: readonly string[];
+          }
+        >;
+      };
+      const team = SEATLEDGER_TIERS.team!;
+      expect(FORECAST_HANDOFF.endsWith(SEATLEDGER_URL)).toBe(true);
+      expect(FORECAST_HANDOFF).toContain(`$${team.priceUsdMonthly}/month`);
+      expect(FORECAST_HANDOFF).toContain(`up to ${team.limits.quantity} developers`);
+      expect(FORECAST_HANDOFF).toContain("for 13 months");
+      expect(team.limits.historyDays).toBeGreaterThanOrEqual(13 * 30);
+      expect(FORECAST_HANDOFF).toContain("Claude Code and Codex history");
+      expect(team.features).toEqual(
+        expect.arrayContaining(["team_ledger", "rate_findings", "email_alerts"]),
+      );
+      expect(FORECAST_HANDOFF).toContain("emails you when the token rate changes");
     },
   );
 });
@@ -169,8 +219,11 @@ describe.skipIf(!existsSync(here(root)))("repo-root files (distribution/root)", 
     expect(plugin.license).toBe("MIT");
   });
 
-  it("the one skill, plans, runs the published CLI", () => {
-    expect(readdirSync(here(`${root}/plugins/tokens-per-dollar/skills`))).toEqual(["plans"]);
+  it("two skills, forecast and plans, each run the published CLI", () => {
+    expect(readdirSync(here(`${root}/plugins/tokens-per-dollar/skills`)).sort()).toEqual([
+      "forecast",
+      "plans",
+    ]);
     const text = read(`${root}/plugins/tokens-per-dollar/skills/plans/SKILL.md`);
     const front = frontmatter(text);
     expect(front.name).toBe("plans");
@@ -178,6 +231,16 @@ describe.skipIf(!existsSync(here(root)))("repo-root files (distribution/root)", 
     expect(front.description!.length).toBeLessThanOrEqual(1024);
     expect(text).toContain(`${RUN} $ARGUMENTS`);
     expect(text).toContain("never why");
+    const forecast = read(`${root}/plugins/tokens-per-dollar/skills/forecast/SKILL.md`);
+    const f = frontmatter(forecast);
+    expect(f.name).toBe("forecast");
+    expect(f.description!.length).toBeGreaterThan(80);
+    expect(f.description!.length).toBeLessThanOrEqual(1024);
+    expect(f.description).toMatch(/weekly limit/);
+    expect(forecast).toContain(`${RUN} forecast $ARGUMENTS`);
+    expect(forecast).toContain("**measured**");
+    expect(forecast).toContain("**estimates**");
+    expect(forecast).toContain("OpenAI publishes no limit as a number");
   });
 
   it("no skill or manifest pre-approves a tool: Claude Code asks before every command", () => {
@@ -256,6 +319,8 @@ describe.skipIf(!existsSync(DATA) && !process.env["TPD_WRITE_DATA"])(
       const want = {
         SAMPLE_AS_OF: asOf,
         SAMPLE_LINES: lines,
+        FORECAST_SAMPLE_AS_OF: new Date(forecastDemo.now).toISOString().slice(0, 10),
+        FORECAST_SAMPLE_LINES: [FORECAST_SYNTHETIC_LABEL, "", ...forecastDemo.text.split("\n")],
         PLANS: plain(PLANS),
         PLAN_CHANGES: plain(PLAN_CHANGES),
         CODEX_CREDIT: plain(CODEX_CREDIT),
@@ -293,6 +358,9 @@ describe.skipIf(!existsSync(DATA) && !process.env["TPD_WRITE_DATA"])(
             "",
             `export const SAMPLE_AS_OF = ${JSON.stringify(want.SAMPLE_AS_OF)};`,
             `export const SAMPLE_LINES: readonly string[] = ${JSON.stringify(want.SAMPLE_LINES)};`,
+            "/** `forecast demo`: seatledger's synthetic history with limit readings added (src/forecast-demo.ts). */",
+            `export const FORECAST_SAMPLE_AS_OF = ${JSON.stringify(want.FORECAST_SAMPLE_AS_OF)};`,
+            `export const FORECAST_SAMPLE_LINES: readonly string[] = ${JSON.stringify(want.FORECAST_SAMPLE_LINES)};`,
             `export const PLANS: readonly DataPlan[] = ${JSON.stringify(want.PLANS)};`,
             `export const PLAN_CHANGES: readonly DataPlanChange[] = ${JSON.stringify(want.PLAN_CHANGES)};`,
             `export const CODEX_CREDIT: { usd: number; derived: boolean; how: string; sources: readonly Cited[] } = ${JSON.stringify(want.CODEX_CREDIT)};`,
